@@ -8,11 +8,10 @@ class PlayerTest {
     @Test
     void testMoveForward(){
         //Given
-        Player player = new Player();
         Room room1 = mock(Room.class);
         Room room2 = mock(Room.class);
+        Player player = new Player(room1);
 
-        player.setCurrentRoom(room1);
 
         //When
         player.moveForward(room2);
@@ -25,10 +24,8 @@ class PlayerTest {
     @Test
     void testMoveForwardNull(){
         //Given
-        Player player = new Player();
         Room room1 = mock(Room.class);
-
-        player.setCurrentRoom(room1);
+        Player player = new Player(room1);
 
         //When
 

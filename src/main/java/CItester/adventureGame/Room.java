@@ -3,8 +3,14 @@ package CItester.adventureGame;
 import java.util.List;
 
 public class Room {
-    public List<Room> getRooms() {
-        //Mock method to be removed
-        return null;
+    private Room previousRoom;
+    private boolean accessible;
+
+    public Room getPreviousRoom() {
+        return previousRoom;
+    }
+
+    public boolean isAccessible() {
+        return accessible;
     }
 }

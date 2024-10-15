@@ -6,7 +6,14 @@ public class Player {
 
     private Room currentRoom;
 
+    public Player(Room startingRoom) {
+        this.currentRoom = startingRoom;
+    }
 
+    public boolean canMoveBack() {
+        Room previousRoom = currentRoom.getPreviousRoom();
+        return previousRoom != null && previousRoom.isAccessible();
+    }
     public void moveForward(Room nextRoom) {
         if (nextRoom == null) {
             throw new NullPointerException();
@@ -22,5 +29,6 @@ public class Player {
 
     public Room getCurrentRoom() {
         return currentRoom;
+
     }
 }
