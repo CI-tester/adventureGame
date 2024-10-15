@@ -1,5 +1,7 @@
 package CItester.adventureGame;
 
+import java.util.List;
+
 public class Room {
     private Room previousRoom;
     private boolean accessible;
