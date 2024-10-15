@@ -17,7 +17,8 @@ class PlayerTest {
     @CsvSource({
             "2,true",
             "-1,false",
-            "5,false"
+            "5,false",
+            "sdajk,false"
     })
     void interactWithItem(int index, boolean expected) {
         //given
