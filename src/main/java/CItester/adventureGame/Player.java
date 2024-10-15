@@ -1,7 +1,5 @@
 package CItester.adventureGame;
 
-import java.util.List;
-
 public class Player {
 
     private Room currentRoom;
@@ -30,5 +28,9 @@ public class Player {
     public Room getCurrentRoom() {
         return currentRoom;
 
+    }
+
+    public Item[] lookInRoom(Room room) {
+        return (Item[]) room.getItems();
     }
 }

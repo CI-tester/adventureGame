@@ -13,4 +13,10 @@ public class Room {
     public boolean isAccessible() {
         return accessible;
     }
+
+    //mocked method to be deleted
+    public Object getItems() {
+
+        return null;
+    }
 }
