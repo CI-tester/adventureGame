@@ -1,10 +1,5 @@
 package CItester.adventureGame;
-
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
@@ -14,21 +9,13 @@ class PlayerTest {
     void testMoveForward(){
         //Given
         Player player = new Player();
-        List<Room> roomList = new ArrayList<>();
         Room room1 = mock(Room.class);
         Room room2 = mock(Room.class);
-        Room room3 = mock(Room.class);
-        Room room4 = mock(Room.class);
-
-        roomList.add(room1);
-        roomList.add(room2);
-        roomList.add(room3);
-        roomList.add(room4);
 
         player.setCurrentRoom(room1);
 
         //When
-        player.moveForward(roomList);
+        player.moveForward(room2);
 
 
         //Then
@@ -36,28 +23,19 @@ class PlayerTest {
     }
 
     @Test
-    void testMoveForwardIndexOutOfBounds(){
+    void testMoveForwardNull(){
         //Given
         Player player = new Player();
-        List<Room> roomList = new ArrayList<>();
         Room room1 = mock(Room.class);
-        Room room2 = mock(Room.class);
-        Room room3 = mock(Room.class);
-        Room room4 = mock(Room.class);
 
-        roomList.add(room1);
-        roomList.add(room2);
-        roomList.add(room3);
-        roomList.add(room4);
-
-        player.setCurrentRoom(room4);
+        player.setCurrentRoom(room1);
 
         //When
 
 
         //Then
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> player.moveForward(roomList));
+        assertThrows(NullPointerException.class,
+                () -> player.moveForward(null));
 
     }
 
