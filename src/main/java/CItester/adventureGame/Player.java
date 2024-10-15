@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    private Room curentRoom;
+    private Room currentRoom;
     Scanner scan = new Scanner(System.in);
   
      public Player(Room startingRoom) {
@@ -13,7 +13,7 @@ public class Player {
 
     public boolean interactWithItem(){
         int index = -1;
-        Item[] itemList = curentRoom.getItems();
+        Item[] itemList = currentRoom.getItems();
         System.out.println("items: ");
         for (int i = 0; i < itemList.length; i++) {
             System.out.println("index: " + i + "item name: " + itemList[i]);
@@ -21,7 +21,7 @@ public class Player {
         System.out.println("with index?");
         try {
             index = Integer.parseInt(scan.next());
-            return curentRoom.useItem(index);
+            return currentRoom.useItem(index);
         }
         catch (NumberFormatException e) {
             throw new RuntimeException(e);
@@ -32,11 +32,12 @@ public class Player {
         int index = -1;
         try {
             index = Integer.parseInt(testIndex);
-            return curentRoom.useItem(index);
+            return currentRoom.useItem(index);
         }
         catch (NumberFormatException e) {
             return false;
         }
+     }
       
  
 

@@ -77,8 +77,8 @@ class PlayerTest {
     })
     void interactWithItem(String index, boolean expected) {
         //given
-        Player playTest = new Player();
         Room room = mock(Room.class);
+        Player playTest = new Player(room);
         List<String> test = List.of("test");
         Item[] arr = {new Item("test", test),
                     new Item("test2", test),
@@ -89,7 +89,7 @@ class PlayerTest {
         when(room.useItem(1)).thenReturn(true);
         when(room.useItem(2)).thenReturn(true);
 
-        playTest.curentRoom = room;
+        playTest.setCurrentRoom(room);
         //when
         boolean res = playTest.interactWithItem(index);
         //then
