@@ -1,54 +1,98 @@
 package CItester.adventureGame;
 
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class PlayerTest {
 
-    @ParameterizedTest
-    @CsvSource({
-            "door,Use item",
-            "test,",
-            "s,",
-            "window,Use item"
-    })
-    void interactWithItem(String testItem, String expected) {
-        //given
+    @Test
+    void testMoveForward(){
+        Room room1 = mock(Room.class);
+        Room room2 = mock(Room.class);
+        Player player = new Player(room1);
+
+        player.moveForward(room2);
+
+        assertEquals(room2, player.getCurrentRoom());
+    }
+
+    @Test
+    void testMoveForwardNull(){
+        Room room1 = mock(Room.class);
+        Player player = new Player(room1);
+
+        assertThrows(NullPointerException.class,
+                () -> player.moveForward(null));
+
+    }
+
+    @Test
+    void testLookInRoom(){
+        //No items in room
+        Room emptyRoom = mock(Room.class);
+        //Items in room
+        Room roomWithItems = mock(Room.class);
+        //Null items in room
+        Room roomNullItems = mock(Room.class);
+
+        Item[] items = new Item[2];
+        Item[] emptyItemList = new Item[0];
         Item item1 = mock(Item.class);
         Item item2 = mock(Item.class);
-        Item item3 = mock(Item.class);
-        Item item4 = mock(Item.class);
+        items[0] = item1;
+        items[1] = item2;
 
-        when(item1.equals("door")).thenReturn(true);
-        when(item1.onUse()).thenReturn("Use item");
+        Player playerEmptyRoom = new Player(emptyRoom);
+        Player playerItemsInRoom = new Player(roomWithItems);
+        Player playerNullItems = new Player(roomNullItems);
 
-        when(item2.equals("char")).thenReturn(true);
-        when(item2.onUse()).thenReturn("Use item");
+        when(emptyRoom.getItems()).thenReturn(emptyItemList);
+        when(roomWithItems.getItems()).thenReturn(items);
+        when(roomNullItems.getItems()).thenReturn(null);
 
-        when(item3.equals("window")).thenReturn(true);
-        when(item3.onUse()).thenReturn("Use item");
 
-        when(item4.equals("lamp")).thenReturn(true);
-        when(item4.onUse()).thenReturn("Use item");
+        assertNull(playerNullItems.lookInRoom(roomNullItems));
+        assertArrayEquals(emptyItemList, playerEmptyRoom.lookInRoom(emptyRoom));
+        assertArrayEquals(items, playerItemsInRoom.lookInRoom(roomWithItems));
 
-        ArrayList<Item> arr = new ArrayList<>();
-        arr.add(item1);
-        arr.add(item2);
-        arr.add(item3);
-        arr.add(item4);
 
-        Player playtest = new Player(arr);
+    }
+  
+      @ParameterizedTest
+    @CsvSource({
+            "2,true",
+            "-1,false",
+            "5,false",
+            "sdajk,false"
+    })
+    void interactWithItem(String index, boolean expected) {
+        //given
+        Room room = mock(Room.class);
+        Player playTest = new Player(room);
+        List<String> test = List.of("test");
+        Item[] arr = {new Item("test", test),
+                    new Item("test2", test),
+                    new Item("test3", test)};
+        when(room.getItems()).thenReturn(arr);
+
+        when(room.useItem(0)).thenReturn(true);
+        when(room.useItem(1)).thenReturn(true);
+        when(room.useItem(2)).thenReturn(true);
+
+        playTest.setCurrentRoom(room);
         //when
-        String answer = playtest.interactWithItem(testItem);
-
+        boolean res = playTest.interactWithItem(index);
         //then
-        assertEquals(expected, answer);
+        assertEquals(expected, res);
     }
 }
