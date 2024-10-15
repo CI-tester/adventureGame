@@ -20,8 +20,9 @@ class PlayerTest {
             "5,false",
             "sdajk,false"
     })
-    void interactWithItem(int index, boolean expected) {
+    void interactWithItem(String index, boolean expected) {
         //given
+        Player playTest = new Player();
         Room room = mock(Room.class);
         List<String> test = List.of("test");
         Item[] arr = {new Item("test", test),
@@ -32,8 +33,10 @@ class PlayerTest {
         when(room.useItem(0)).thenReturn(true);
         when(room.useItem(1)).thenReturn(true);
         when(room.useItem(2)).thenReturn(true);
+
+        playTest.curentRoom = room;
         //when
-        boolean res = room.useItem(index);
+        boolean res = playTest.interactWithItem(index);
         //then
         assertEquals(expected, res);
     }
