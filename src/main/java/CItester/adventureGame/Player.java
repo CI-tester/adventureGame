@@ -1,20 +1,21 @@
 package CItester.adventureGame;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player {
-    ArrayList<Item> items;
+    Room curentRoom;
+    Scanner scan = new Scanner(System.in);
 
-    Player(ArrayList<Item> listOfItems){
-        items = listOfItems;
-    }
-
-    String interactWithItem(String itemName){
-        for (Item item : items) {
-            if (item.equals(itemName)){
-                return item.onUse();
-            }
+    boolean interactWithItem(int index){
+        //int index = -1;
+        Item[] itemList = curentRoom.getItems();
+        System.out.println("items: ");
+        for (int i = 0; i < itemList.length; i++) {
+            System.out.println("index: " + i + "item name: " + itemList[i]);
         }
-        return null;
+        //System.out.println("index?");
+        //index = scan.nextInt();
+        return curentRoom.useItem(index);
     }
 }

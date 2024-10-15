@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -14,41 +15,25 @@ class PlayerTest {
 
     @ParameterizedTest
     @CsvSource({
-            "door,Use item",
-            "test,",
-            "s,",
-            "window,Use item"
+            "2,true",
+            "-1,false",
+            "5,false"
     })
-    void interactWithItem(String testItem, String expected) {
+    void interactWithItem(int index, boolean expected) {
         //given
-        Item item1 = mock(Item.class);
-        Item item2 = mock(Item.class);
-        Item item3 = mock(Item.class);
-        Item item4 = mock(Item.class);
+        Room room = mock(Room.class);
+        List<String> test = List.of("test");
+        Item[] arr = {new Item("test", test),
+                    new Item("test2", test),
+                    new Item("test3", test)};
+        when(room.getItems()).thenReturn(arr);
 
-        when(item1.equals("door")).thenReturn(true);
-        when(item1.onUse()).thenReturn("Use item");
-
-        when(item2.equals("char")).thenReturn(true);
-        when(item2.onUse()).thenReturn("Use item");
-
-        when(item3.equals("window")).thenReturn(true);
-        when(item3.onUse()).thenReturn("Use item");
-
-        when(item4.equals("lamp")).thenReturn(true);
-        when(item4.onUse()).thenReturn("Use item");
-
-        ArrayList<Item> arr = new ArrayList<>();
-        arr.add(item1);
-        arr.add(item2);
-        arr.add(item3);
-        arr.add(item4);
-
-        Player playtest = new Player(arr);
+        when(room.useItem(0)).thenReturn(true);
+        when(room.useItem(1)).thenReturn(true);
+        when(room.useItem(2)).thenReturn(true);
         //when
-        String answer = playtest.interactWithItem(testItem);
-
+        boolean res = room.useItem(index);
         //then
-        assertEquals(expected, answer);
+        assertEquals(expected, res);
     }
 }

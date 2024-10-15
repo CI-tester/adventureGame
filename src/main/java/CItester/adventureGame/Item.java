@@ -3,7 +3,6 @@ package CItester.adventureGame;
 import java.util.List;
 
 public class Item {
-
     private String itemName;
     private List<String> possibleInteractions;
 
