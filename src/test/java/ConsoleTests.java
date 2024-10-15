@@ -1,13 +1,18 @@
 import CItester.adventureGame.Console;
+import CItester.adventureGame.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ConsoleTests {
 
     @Test
     void doTurnTests(){
-        Console c = new Console();
+        Console c = new Console(mock(Player.class));
+
+        when(c.doTurn(2)).thenReturn(true);
 
         boolean res1= c.doTurn(-1);
         boolean res2= c.doTurn(-0);

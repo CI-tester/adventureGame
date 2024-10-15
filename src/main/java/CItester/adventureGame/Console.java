@@ -5,6 +5,14 @@ import java.util.Scanner;
 public class Console {
     Scanner scanner = new Scanner(System.in);
     boolean running = true;
+
+    public Console(Player p) {
+        this.p = p;
+    }
+
+    Player p;
+
+
     public void printInfo(){
         System.out.println("Vad vill ni göra:" +
                 "\n1. Gå till nästa rum" +
@@ -14,7 +22,26 @@ public class Console {
                 "\n5. Avsluta Spelet");
     }
     public boolean doTurn(int choice){
-        return false;
+        switch (choice){
+            case 1:
+                p.moveForward();
+                break;
+            case 2:
+                p.moveBack();
+                break;
+            case 3:
+                p.lookInRoom();
+                break;
+            case 4:
+                p.interactWithItem();
+                break;
+            case 5:
+                running = false;
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
     public void runGame(){
         while (running){
