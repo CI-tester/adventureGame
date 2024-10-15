@@ -16,10 +16,20 @@ public Room(ArrayList<Item> itemsInvisible, ArrayList<Item> itemsVisible) {
 }
 
 public Item[] getItems(){
-    return null;
+    if(itemsVisible.isEmpty()) return null;
+    return itemsVisible.toArray(new Item[0]);
 }
 public boolean useItem(int index){
-    return false;
+    if(index < 0 || index >= itemsVisible.size()){
+        throw new IndexOutOfBoundsException();
+    }
+    Item item = itemsVisible.get(index);
+    if(item == null) return false;
+
+
+    String itemUse = item.onUse();
+    System.out.println(itemUse);
+    return true;
 }
 
 }

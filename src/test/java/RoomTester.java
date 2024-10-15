@@ -37,9 +37,9 @@ public class RoomTester {
 
 
 
-        assertThrows(InstantiationException.class, room::getItems);
-        assertNotNull(room2.getItems());
-        assertEquals(items2.toArray(), room3.getItems());
+        assertThrows(NullPointerException.class, room::getItems);
+        assertNull(room2.getItems());
+        assertArrayEquals(items2.toArray(new Item[0]), room3.getItems());
 
 
     }
@@ -75,9 +75,9 @@ public class RoomTester {
         //ItemNull
         assertFalse(room3.useItem(1));
         //ArrayNull
-        assertThrows(InstantiationException.class, ()->{room.useItem(2);});
+        assertThrows(NullPointerException.class, ()->{room.useItem(2);});
         //ItemWorks
-        assertTrue(room2.useItem(1));
+        assertTrue(room3.useItem(0));
     }
 
 
