@@ -1,13 +1,26 @@
 package CItester.adventureGame;
 
+import java.util.List;
+
 public class Item {
-    String itemName;
-    String onUse(){
-        //Use item
-        return "";
+
+    private String itemName;
+    private List<String> possibleInteractions;
+
+    public Item(String itemName, List<String> possibleInteractions) {
+        this.itemName = itemName;
+        this.possibleInteractions = possibleInteractions;
     }
 
-    boolean equals(String name){
-        return itemName.equalsIgnoreCase(name);
+    public String getItemName() {
+        return itemName;
+    }
+
+    public List<String> getPossibleInteractions() {
+        return possibleInteractions;
+    }
+
+    public String onUse(){
+        return "You have used the " + itemName + " item!";
     }
 }
