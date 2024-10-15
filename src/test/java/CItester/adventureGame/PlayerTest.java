@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class PlayerTest {
 
@@ -34,9 +33,32 @@ class PlayerTest {
 
         //Then
         assertEquals(room2, player.getCurrentRoom());
-
-
     }
 
+    @Test
+    void testMoveForwardIndexOutOfBounds(){
+        //Given
+        Player player = new Player();
+        List<Room> roomList = new ArrayList<>();
+        Room room1 = mock(Room.class);
+        Room room2 = mock(Room.class);
+        Room room3 = mock(Room.class);
+        Room room4 = mock(Room.class);
+
+        roomList.add(room1);
+        roomList.add(room2);
+        roomList.add(room3);
+        roomList.add(room4);
+
+        player.setCurrentRoom(room4);
+
+        //When
+
+
+        //Then
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> player.moveForward(roomList));
+
+    }
 
 }
