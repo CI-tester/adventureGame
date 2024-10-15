@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    Room curentRoom;
+    private Room curentRoom;
     Scanner scan = new Scanner(System.in);
+  
+     public Player(Room startingRoom) {
+        this.currentRoom = startingRoom;
+    }
 
-    boolean interactWithItem(){
+    public boolean interactWithItem(){
         int index = -1;
         Item[] itemList = curentRoom.getItems();
         System.out.println("items: ");
@@ -24,7 +28,7 @@ public class Player {
         }
     }
 
-    boolean interactWithItem(String testIndex){//for testing
+    public boolean interactWithItem(String testIndex){//for testing
         int index = -1;
         try {
             index = Integer.parseInt(testIndex);
@@ -33,5 +37,33 @@ public class Player {
         catch (NumberFormatException e) {
             return false;
         }
+      
+ 
+
+    public boolean canMoveBack() {
+        Room previousRoom = currentRoom.getPreviousRoom();
+        return previousRoom != null && previousRoom.isAccessible();
+    }
+    public void moveForward(Room nextRoom) {
+        if (nextRoom == null) {
+            throw new NullPointerException();
+        }
+        setCurrentRoom(nextRoom);
+    }
+
+
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+
+    }
+
+    public Item[] lookInRoom(Room room) {
+        return (Item[]) room.getItems();
+
     }
 }
