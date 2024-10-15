@@ -13,7 +13,7 @@ public class Player {
     public boolean canMoveBack() {
         Room previousRoom = currentRoom.getPreviousRoom();
         return previousRoom != null && previousRoom.isAccessible();
-
+    }
     public void moveForward(Room nextRoom) {
         if (nextRoom == null) {
             throw new NullPointerException();
