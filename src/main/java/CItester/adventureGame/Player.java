@@ -63,8 +63,8 @@ public class Player {
 
     }
 
-    public Item[] lookInRoom(Room room) {
-        return (Item[]) room.getItems();
+    public Item[] lookInRoom() {
+        return this.currentRoom.getItems();
 
     }
 }
