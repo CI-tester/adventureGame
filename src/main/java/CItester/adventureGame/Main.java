@@ -34,7 +34,7 @@ public class Main {
         room2Item3Interaction.add("Nyckeln har tinat och används för att öppna dörren");
         room2ItemsInvisable.add(new Radiator("Dörr nyckel",room2Item3Interaction));
 
-        Room r2 = new Room(room2ItemsInvisable,room1Items);
+        Room r2 = new Room(room2ItemsInvisable,room2Items);
         Room r3 = new Room(new ArrayList<>(),new ArrayList<>());
         Room r4 = new Room(new ArrayList<>(),new ArrayList<>());
 
