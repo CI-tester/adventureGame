@@ -11,6 +11,6 @@ public class Lightswitch extends Item{
 
     @Override
     public String onUse(){
-        return "You flip the lightswitch, the room is now illuminated! ";
+        return "You flip the lightswitch";
     }
 }

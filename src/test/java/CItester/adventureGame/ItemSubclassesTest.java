@@ -53,9 +53,9 @@ class ItemSubclassesTest {
     //ParameterizedTest
     @ParameterizedTest
     @CsvSource({
-            "Key,The key have been used, The door is unlocked!",
-            "Lightswitch,You flip the lightswitch, the room is now illuminated!",
-            "Frozen Key,The key is frozen, you need to thaw it first!",
+            "Key,The key have been used",
+            "Lightswitch,You flip the lightswitch",
+            "Frozen Key,The key is frozen",
             "Radiator,You turn the radiator. The room starts to warm up.",
     })
 

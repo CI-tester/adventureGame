@@ -11,6 +11,6 @@ public class Key extends Item{
 
     @Override
    public String onUse(){
-        return "The key have been used, The door is unlocked! ";
+        return "The key have been used";
     }
 }
