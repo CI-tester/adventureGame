@@ -15,27 +15,44 @@ import static org.mockito.Mockito.*;
 class PlayerTest {
 
     private Player player;
-    private Room currentRoom, previousRoom;
+    private Room currentRoom, previousRoom, nextRoom;
 
     @BeforeEach
     void setUp() {
         currentRoom = mock(Room.class);
         previousRoom = mock(Room.class);
+        nextRoom = mock(Room.class);
         player = new Player(currentRoom);
     }
 
     @Test
     void testMoveForward() {
-        Room room2 = mock(Room.class);
+        when(nextRoom.isAccessible()).thenReturn(true);
 
-        player.moveForward(room2);
+        player.nextRoom = nextRoom;
+        player.moveForward();
 
-        assertEquals(room2, player.getCurrentRoom());
+        assertEquals(nextRoom, player.getCurrentRoom());
+        assertEquals(currentRoom, player.previousRoom);
+        assertNull(player.nextRoom);
     }
 
     @Test
     void testMoveForwardNull() {
-        assertThrows(NullPointerException.class, () -> player.moveForward(null));
+        when(nextRoom.isAccessible()).thenReturn(false);
+
+        player.nextRoom = nextRoom;
+
+        assertThrows(IllegalStateException.class, () -> player.moveForward());
+    }
+
+    @Test
+    void testMoveBack(){
+        Room room2 = mock(Room.class);
+        player.moveForward();
+        player.moveBack();
+
+        assertEquals(currentRoom, player.getCurrentRoom());
     }
 
     @Test
