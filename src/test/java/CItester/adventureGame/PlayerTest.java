@@ -61,9 +61,9 @@ class PlayerTest {
         when(roomNullItems.getItems()).thenReturn(null);
 
 
-        assertNull(playerNullItems.lookInRoom(roomNullItems));
-        assertArrayEquals(emptyItemList, playerEmptyRoom.lookInRoom(emptyRoom));
-        assertArrayEquals(items, playerItemsInRoom.lookInRoom(roomWithItems));
+        assertNull(playerNullItems.lookInRoom());
+        assertArrayEquals(emptyItemList, playerEmptyRoom.lookInRoom());
+        assertArrayEquals(items, playerItemsInRoom.lookInRoom());
 
 
     }
