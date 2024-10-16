@@ -17,7 +17,7 @@ class ItemSubclassesTest {
         //When
         String result = key.onUse();
         //Then
-        assertEquals("The key have been used, The door is unlocked! ", result);
+        assertEquals("The key have been used", result);
     }
 
     @Test
@@ -27,7 +27,7 @@ class ItemSubclassesTest {
         //When
         String result = lightswitch.onUse();
         //Then
-        assertEquals("You flip the lightswitch, the room is now illuminated! ", result);
+        assertEquals("You flip the lightswitch", result);
     }
 
     @Test
@@ -37,7 +37,7 @@ class ItemSubclassesTest {
         //When
         String result = frozenKey.onUse();
         //Then
-        assertEquals("The key is frozen, you need to thaw it first!", result);
+        assertEquals("The key is frozen", result);
     }
 
     @Test
