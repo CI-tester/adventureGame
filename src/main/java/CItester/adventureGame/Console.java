@@ -36,6 +36,9 @@ public class Console {
                 break;
             case 3:
                 Item[] items = p.lookInRoom();
+                 if(items.length == 0){
+                     System.out.println("There are no visable items in the room");
+                }
                 System.out.println("You have the following objects in the room:");
                 for (Item item : items) {
                     System.out.println("\n"+item);
