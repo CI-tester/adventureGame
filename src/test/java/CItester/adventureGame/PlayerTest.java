@@ -1,6 +1,7 @@
 package CItester.adventureGame;
 
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,17 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
 class PlayerTest {
 
+    private Player player;
+    private Room currentRoom, previousRoom;
+
+    @BeforeEach
+    void setUp() {
+        currentRoom = mock(Room.class);
+        previousRoom = mock(Room.class);
+        player = new Player(currentRoom);
+    }
+
     @Test
-    void testMoveForward(){
-        Room room1 = mock(Room.class);
+    void testMoveForward() {
         Room room2 = mock(Room.class);
-        Player player = new Player(room1);
 
         player.moveForward(room2);
 
@@ -27,22 +34,17 @@ class PlayerTest {
     }
 
     @Test
-    void testMoveForwardNull(){
-        Room room1 = mock(Room.class);
-        Player player = new Player(room1);
-
-        assertThrows(NullPointerException.class,
-                () -> player.moveForward(null));
-
+    void testMoveForwardNull() {
+        assertThrows(NullPointerException.class, () -> player.moveForward(null));
     }
 
     @Test
-    void testLookInRoom(){
-        //No items in room
+    void testLookInRoom() {
+        // Inga föremål i rummet
         Room emptyRoom = mock(Room.class);
-        //Items in room
+        // Föremål i rummet
         Room roomWithItems = mock(Room.class);
-        //Null items in room
+        // Rummet har null-föremål
         Room roomNullItems = mock(Room.class);
 
         Item[] items = new Item[2];
@@ -60,15 +62,13 @@ class PlayerTest {
         when(roomWithItems.getItems()).thenReturn(items);
         when(roomNullItems.getItems()).thenReturn(null);
 
-
         assertNull(playerNullItems.lookInRoom());
         assertArrayEquals(emptyItemList, playerEmptyRoom.lookInRoom());
         assertArrayEquals(items, playerItemsInRoom.lookInRoom());
 
-
     }
-  
-      @ParameterizedTest
+
+    @ParameterizedTest
     @CsvSource({
             "2,true",
             "-1,false",
@@ -76,23 +76,29 @@ class PlayerTest {
             "sdajk,false"
     })
     void interactWithItem(String index, boolean expected) {
-        //given
         Room room = mock(Room.class);
-        Player playTest = new Player(room);
         List<String> test = List.of("test");
-        Item[] arr = {new Item("test", test),
-                    new Item("test2", test),
-                    new Item("test3", test)};
+        Item[] arr = {
+                new Item("test", test),
+                new Item("test2", test),
+                new Item("test3", test)
+        };
         when(room.getItems()).thenReturn(arr);
-
         when(room.useItem(0)).thenReturn(true);
         when(room.useItem(1)).thenReturn(true);
         when(room.useItem(2)).thenReturn(true);
 
-        playTest.setCurrentRoom(room);
-        //when
-        boolean res = playTest.interactWithItem(index);
-        //then
+        player.setCurrentRoom(room);
+        boolean res = player.interactWithItem(index);
         assertEquals(expected, res);
+    }
+
+    @DisplayName("Testar om spelaren kan gå tillbaka när föregående rum är tillgängligt")
+    @Test
+    void testCanMoveBackWhenPreviousRoomIsAccessible() {
+        when(currentRoom.getPreviousRoom()).thenReturn(previousRoom);
+        when(previousRoom.isAccessible()).thenReturn(true);
+
+        assertTrue(player.canMoveBack(), "Player should be able to move back when previous room is accessible.");
     }
 }
