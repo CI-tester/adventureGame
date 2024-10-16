@@ -13,8 +13,7 @@ public class ConsoleTests {
 
     @Test
     void doTurnTests(){
-        Room[] rooms = {mock(Room.class)};
-        Console c = new Console(mock(Player.class), rooms);
+        Console c = new Console(mock(Player.class));
 
         when(c.doTurn(2)).thenReturn(true);
 

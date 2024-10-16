@@ -6,12 +6,11 @@ public class Console {
     Scanner scanner = new Scanner(System.in);
     boolean running = true;
 
-    public Console(Player p, Room[] rooms) {
+    public Console(Player p) {
         this.p = p;
     }
 
     Player p;
-    Room[] rooms;
     int roomIndex = 0;
 
     public void printInfo(){
@@ -25,11 +24,11 @@ public class Console {
     public boolean doTurn(int choice){
         switch (choice){
             case 1:
-                p.moveForward(rooms[++roomIndex]);
+                p.moveForward();
                 break;
             case 2:
                 if(p.canMoveBack()){
-                //    p.moveBack(rooms[--roomIndex]);
+                    p.moveBack();
                 }
                 break;
             case 3:
