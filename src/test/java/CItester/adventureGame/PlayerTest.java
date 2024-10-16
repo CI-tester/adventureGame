@@ -79,9 +79,9 @@ class PlayerTest {
         Room room = mock(Room.class);
         List<String> test = List.of("test");
         Item[] arr = {
-                new Item("test", test),
-                new Item("test2", test),
-                new Item("test3", test)
+                new Item("test", test, false),
+                new Item("test2", test, false),
+                new Item("test3", test, false)
         };
         when(room.getItems()).thenReturn(arr);
         when(room.useItem(0)).thenReturn(true);
