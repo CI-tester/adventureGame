@@ -5,10 +5,12 @@ import java.util.List;
 public class Item {
     private String itemName;
     private List<String> possibleInteractions;
+    protected boolean canGlowInDark;
 
-    public Item(String itemName, List<String> possibleInteractions) {
+    public Item(String itemName, List<String> possibleInteractions, boolean canGlowInDark) {
         this.itemName = itemName;
         this.possibleInteractions = possibleInteractions;
+        this.canGlowInDark = canGlowInDark;
     }
 
     public String getItemName() {
@@ -21,5 +23,9 @@ public class Item {
 
     public String onUse(){
         return "You have used the " + itemName + " item!";
+    }
+
+    public boolean isGlowing() {
+        return canGlowInDark; // Returnera värdet av egenskapen
     }
 }
