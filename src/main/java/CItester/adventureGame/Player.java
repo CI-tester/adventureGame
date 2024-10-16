@@ -55,8 +55,9 @@ public class Player {
 
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
-
+        room.getRoomDescription();
     }
+
 
     public Room getCurrentRoom() {
         return currentRoom;
