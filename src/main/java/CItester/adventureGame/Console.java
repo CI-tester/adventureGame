@@ -24,12 +24,15 @@ public class Console {
     public boolean doTurn(int choice){
         switch (choice){
             case 1:
-                p.moveForward();
+                if(p.canMoveForward()){
+                     p.moveForward();
+                }else System.out.println("Kan inte gå framåt");
+
                 break;
             case 2:
                 if(p.canMoveBack()){
                     p.moveBack();
-                }
+                }else System.out.println("Kan inte gå bakåt");
                 break;
             case 3:
                 Item[] items = p.lookInRoom();
