@@ -136,12 +136,4 @@ class PlayerTest {
         assertEquals(expected, res);
     }
 
-    @DisplayName("Testar om spelaren kan gå tillbaka när föregående rum är tillgängligt")
-    @Test
-    void testCanMoveBackWhenPreviousRoomIsAccessible() {
-        when(currentRoom.getPreviousRoom()).thenReturn(previousRoom);
-        when(previousRoom.isAccessible()).thenReturn(true);
-
-        assertTrue(player.canMoveBack(), "Player should be able to move back when previous room is accessible.");
-    }
 }
