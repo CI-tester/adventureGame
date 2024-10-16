@@ -27,7 +27,9 @@ public class Console {
                 p.moveForward();
                 break;
             case 2:
-                p.moveBack();
+                if(p.canMoveBack()){
+                    p.moveBack();
+                }
                 break;
             case 3:
                 p.lookInRoom();
