@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    private Room currentRoom;
+    Room currentRoom;
     Scanner scan = new Scanner(System.in);
   
      public Player(Room startingRoom) {
@@ -38,18 +38,32 @@ public class Player {
             return false;
         }
      }
-      
- 
+
 
     public boolean canMoveBack() {
-        Room previousRoom = currentRoom.getPreviousRoom();
-        return previousRoom != null && previousRoom.isAccessible();
+        return this.currentRoom.getPreviousRoom() != null && this.currentRoom.getPreviousRoom().isAccessible();
     }
-    public void moveForward(Room nextRoom) {
-        if (nextRoom == null) {
-            throw new NullPointerException();
+
+    public void moveBack(){
+        if (!canMoveBack()) {
+            throw new IllegalStateException("Cannot move back");
+        } else {
+            setCurrentRoom(this.currentRoom.getPreviousRoom());
         }
-        setCurrentRoom(nextRoom);
+    }
+
+    public boolean canMoveForward() {
+        return this.currentRoom.getNextRoom() != null && this.currentRoom.getNextRoom().isAccessible();
+    }
+
+
+    public void moveForward() {
+        if (!canMoveForward()) {
+            throw new IllegalStateException("Cannot move forward");
+        }
+        else {
+            setCurrentRoom(this.currentRoom.getNextRoom());
+        }
     }
 
 

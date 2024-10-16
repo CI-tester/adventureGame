@@ -15,28 +15,65 @@ import static org.mockito.Mockito.*;
 class PlayerTest {
 
     private Player player;
-    private Room currentRoom, previousRoom;
+    private Room currentRoom, previousRoom, nextRoom;
 
     @BeforeEach
     void setUp() {
         currentRoom = mock(Room.class);
         previousRoom = mock(Room.class);
+        nextRoom = mock(Room.class);
         player = new Player(currentRoom);
     }
 
     @Test
     void testMoveForward() {
-        Room room2 = mock(Room.class);
+        when(nextRoom.isAccessible()).thenReturn(true);
+        when(player.currentRoom.getNextRoom()).thenReturn(nextRoom);
+        when(player.currentRoom.getPreviousRoom()).thenReturn(previousRoom);
+        player.moveForward();
 
-        player.moveForward(room2);
-
-        assertEquals(room2, player.getCurrentRoom());
+        assertEquals(nextRoom, player.getCurrentRoom());
+        //assertEquals(currentRoom, player.currentRoom.getPreviousRoom());
     }
 
     @Test
-    void testMoveForwardNull() {
-        assertThrows(NullPointerException.class, () -> player.moveForward(null));
+    void testCannotMoveForwardWhenNoPreviousRoom() {
+        when(currentRoom.getNextRoom()).thenReturn(null);
+        assertThrows(IllegalStateException.class, () -> player.moveForward());
     }
+
+    @Test
+    void testMoveForwardNotAccessible() {
+        when(nextRoom.isAccessible()).thenReturn(false);
+
+        assertThrows(IllegalStateException.class, () -> player.moveForward());
+    }
+
+    @Test
+    void testMoveBack(){
+        when(previousRoom.isAccessible()).thenReturn(true);
+        when(player.currentRoom.getNextRoom()).thenReturn(nextRoom);
+        when(player.currentRoom.getPreviousRoom()).thenReturn(previousRoom);
+        player.moveBack();
+
+        assertEquals(previousRoom, player.getCurrentRoom());
+    }
+
+    @Test
+    void testCannotMoveBackWhenNoPreviousRoom() {
+        when(currentRoom.getPreviousRoom()).thenReturn(null);
+
+        assertThrows(IllegalStateException.class, () -> player.moveBack());
+    }
+
+    @Test
+    void testMoveBackNotAccessible() {
+        when(previousRoom.isAccessible()).thenReturn(false);
+
+     assertThrows(IllegalStateException.class, () -> player.moveBack());
+    }
+
+
 
     @Test
     void testLookInRoom() {
@@ -93,12 +130,4 @@ class PlayerTest {
         assertEquals(expected, res);
     }
 
-    @DisplayName("Testar om spelaren kan gå tillbaka när föregående rum är tillgängligt")
-    @Test
-    void testCanMoveBackWhenPreviousRoomIsAccessible() {
-        when(currentRoom.getPreviousRoom()).thenReturn(previousRoom);
-        when(previousRoom.isAccessible()).thenReturn(true);
-
-        assertTrue(player.canMoveBack(), "Player should be able to move back when previous room is accessible.");
-    }
 }
