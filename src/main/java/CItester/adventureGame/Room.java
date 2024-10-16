@@ -46,7 +46,26 @@ public boolean useItem(int index){
     Item item = itemsVisible.get(index);
     if(item == null) return false;
 
+    if(item instanceof Book){
 
+    }else if(item instanceof Key){
+        if(nextRoom != null){
+            nextRoom.accessible = true;
+        }
+    }else if(item instanceof Radiator){
+        for (Item isFrozenKey: itemsVisible){
+            if(isFrozenKey instanceof FrozenKey){
+                itemsVisible.remove(isFrozenKey);
+                ArrayList<String> interaction = new ArrayList();
+                interaction.add("The door has been unlocked");
+                itemsVisible.add(new Key("DoorKey",interaction));
+            }
+        }
+    }else if(item instanceof Lightswitch){
+        if(nextRoom != null){
+            nextRoom.accessible = true;
+        }
+    }
     String itemUse = item.onUse();
     System.out.println(itemUse);
     return true;

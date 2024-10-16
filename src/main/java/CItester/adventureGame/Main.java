@@ -12,8 +12,29 @@ public class Main {
     }
 
     public static Room setUpRooms(){
-        Room r1 = new Room(new ArrayList<>(),new ArrayList<>());
-        Room r2 = new Room(new ArrayList<>(),new ArrayList<>());
+
+
+        ArrayList<Item> room1Items = new ArrayList<Item>();
+        ArrayList<String> room1Item1Interaction = new ArrayList<String>();
+        room1Item1Interaction.add("Du slår på lampan och ser dörren till nästa rum");
+        room1Items.add(new Lightswitch("Lightswitch",room1Item1Interaction));
+        Room r1 = new Room(new ArrayList<>(),room1Items);
+
+
+        ArrayList<Item> room2Items = new ArrayList<Item>();
+        ArrayList<String> room2Item1Interaction = new ArrayList<String>();
+        room2Item1Interaction.add("Du ser nycken till dörren i ett isblock men kan inte få ut den och undrar om de finns något sätt");
+        room2Items.add(new FrozenKey("Fryst Nyckel",room1Item1Interaction));
+        ArrayList<String> room2Item2Interaction = new ArrayList<String>();
+        room2Item2Interaction.add("Du ser ett element och slår på de ");
+        room2Items.add(new Radiator("Element",room2Item2Interaction));
+
+        ArrayList<Item> room2ItemsInvisable = new ArrayList<Item>();
+        ArrayList<String> room2Item3Interaction = new ArrayList<String>();
+        room2Item3Interaction.add("Nyckeln har tinat och används för att öppna dörren");
+        room2ItemsInvisable.add(new Radiator("Dörr nyckel",room2Item3Interaction));
+
+        Room r2 = new Room(room2ItemsInvisable,room1Items);
         Room r3 = new Room(new ArrayList<>(),new ArrayList<>());
         Room r4 = new Room(new ArrayList<>(),new ArrayList<>());
 
