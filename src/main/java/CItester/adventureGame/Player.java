@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    private Room currentRoom;
+    Room currentRoom;
     Room previousRoom;
     Room nextRoom;
     Scanner scan = new Scanner(System.in);

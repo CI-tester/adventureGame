@@ -38,7 +38,14 @@ class PlayerTest {
     }
 
     @Test
-    void testMoveForwardNull() {
+    void testCannotMoveForwardWhenNoPreviousRoom() {
+        player.nextRoom = null;
+
+        assertThrows(IllegalStateException.class, () -> player.moveForward());
+    }
+
+    @Test
+    void testMoveForwardNotAccessible() {
         when(nextRoom.isAccessible()).thenReturn(false);
 
         player.nextRoom = nextRoom;
@@ -48,12 +55,31 @@ class PlayerTest {
 
     @Test
     void testMoveBack(){
-        Room room2 = mock(Room.class);
-        player.moveForward();
+        player.previousRoom = previousRoom;
+        player.currentRoom = nextRoom;
+        when(previousRoom.isAccessible()).thenReturn(true);
+
         player.moveBack();
 
-        assertEquals(currentRoom, player.getCurrentRoom());
+        assertEquals(previousRoom, player.getCurrentRoom());
+        assertEquals(nextRoom, player.nextRoom);
     }
+
+    @Test
+    void testCannotMoveBackWhenNoPreviousRoom() {
+        player.previousRoom = null;
+
+        assertThrows(IllegalStateException.class, () -> player.moveBack());
+    }
+
+    @Test
+    void testMoveBackNotAccessible() {
+        when(previousRoom.isAccessible()).thenReturn(false);
+
+     assertThrows(IllegalStateException.class, () -> player.moveBack());
+    }
+
+
 
     @Test
     void testLookInRoom() {
