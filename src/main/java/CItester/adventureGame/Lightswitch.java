@@ -5,7 +5,7 @@ import java.util.List;
 public class Lightswitch extends Item{
 
     public Lightswitch (String name, List<String> possibleInteractions) {
-        super(name, possibleInteractions);
+        super(name, possibleInteractions, true);
 
     }
 
