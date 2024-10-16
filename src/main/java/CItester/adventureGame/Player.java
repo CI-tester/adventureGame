@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class Player {
     Room currentRoom;
-    Room previousRoom;
-    Room nextRoom;
     Scanner scan = new Scanner(System.in);
   
      public Player(Room startingRoom) {
@@ -43,21 +41,19 @@ public class Player {
 
 
     public boolean canMoveBack() {
-        return this.previousRoom != null && this.previousRoom.isAccessible();
+        return this.currentRoom.getPreviousRoom() != null && this.currentRoom.getPreviousRoom().isAccessible();
     }
 
     public void moveBack(){
         if (!canMoveBack()) {
             throw new IllegalStateException("Cannot move back");
         } else {
-            this.nextRoom = this.currentRoom;
-            setCurrentRoom(this.previousRoom);
-            this.previousRoom = null;
+            setCurrentRoom(this.currentRoom.getPreviousRoom());
         }
     }
 
     public boolean canMoveForward() {
-        return this.nextRoom != null && this.nextRoom.isAccessible();
+        return this.currentRoom.getNextRoom() != null && this.currentRoom.getNextRoom().isAccessible();
     }
 
 
@@ -66,9 +62,7 @@ public class Player {
             throw new IllegalStateException("Cannot move forward");
         }
         else {
-            this.previousRoom = this.currentRoom;
-            setCurrentRoom(this.nextRoom);
-            this.nextRoom = null;
+            setCurrentRoom(this.currentRoom.getNextRoom());
         }
     }
 
