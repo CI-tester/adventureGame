@@ -5,7 +5,7 @@ import java.util.List;
 public class FrozenKey extends Item{
 
     public FrozenKey (String name, List<String> possibleInteractions) {
-        super(name, possibleInteractions);
+        super(name, possibleInteractions, false);
 
     }
 

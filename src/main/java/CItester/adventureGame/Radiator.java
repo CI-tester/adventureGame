@@ -5,7 +5,7 @@ import java.util.List;
 public class Radiator extends Item{
 
     public Radiator (String name, List<String> possibleInteractions) {
-        super(name, possibleInteractions);
+        super(name, possibleInteractions, false);
 
     }
 

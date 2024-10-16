@@ -14,20 +14,20 @@ class ItemTest {
 
     @Test
     void getItemName() {
-        Item item = new Item("Book", Arrays.asList("Use", "Inspect"));
+        Item item = new Item("Book", Arrays.asList("Use", "Inspect"), false);
         assertEquals("Book", item.getItemName());
     }
 
     @Test
     void getPossibleInteractions() {
         List<String> expectedInteractions = Arrays.asList("Use", "Drop");
-        Item item = new Item("Key", expectedInteractions);
+        Item item = new Item("Key", expectedInteractions, false);
         assertEquals(expectedInteractions, item.getPossibleInteractions());
     }
 
     @Test
     void onUse() {
-        Item item = new Item("Key", Arrays.asList("Use", "Inspect"));
+        Item item = new Item("Key", Arrays.asList("Use", "Inspect"), false);
         assertEquals("You have used the " + item.getItemName() + " item!", item.onUse() );
     }
 
@@ -40,7 +40,7 @@ class ItemTest {
     })
 
     void parameterizedItemTest(String itemName, String expectedItemMessage) {
-        Item item = new Item(itemName, Arrays.asList("Use", "Inspect"));
+        Item item = new Item(itemName, Arrays.asList("Use", "Inspect"), false);
         assertEquals(expectedItemMessage, item.onUse());
     }
 
