@@ -92,9 +92,9 @@ public void setPreviousRoom(Room previousRoom) {
 public boolean isAccessible() {
         return accessible;
 }
-public void/*String*/ getRoomDescription() { //call the Method when you enter a new room
-        System.out.print(description);
-        //return description
+public String getRoomDescription() { //call the Method when you enter a new room
+        //System.out.print(description);
+        return description;
 }
 void setRoomDescription(String description){
     this.description = description;

@@ -20,7 +20,6 @@ public class Main {
         room1Items.add(new Lightswitch("Lightswitch",room1Item1Interaction));
         Room r1 = new Room(new ArrayList<>(),room1Items);
 
-
         ArrayList<Item> room2Items = new ArrayList<Item>();
         ArrayList<String> room2Item1Interaction = new ArrayList<String>();
         room2Item1Interaction.add("Du ser nycken till dörren i ett isblock men kan inte få ut den och undrar om de finns något sätt");
@@ -37,6 +36,14 @@ public class Main {
         Room r2 = new Room(room2ItemsInvisable,room2Items);
         Room r3 = new Room(new ArrayList<>(),new ArrayList<>());
         Room r4 = new Room(new ArrayList<>(),new ArrayList<>());
+
+        r1.setRoomDescription("Mörkt rum, leta runt för att hitta en lightswitch," +
+                " Interagera med den för att tända rummet " +
+                "och därmed se dörren för att komma vidare ");
+
+        r2.setRoomDescription("Kallt rum, man ser en nyckel i ett isblock, " +
+                "använd radiatorn för att smälta isblocket och " +
+                "kunna låsa upp dörren för att komma vidare");
 
        r1.setNextRoom(r2);
        r2.setNextRoom(r3);
