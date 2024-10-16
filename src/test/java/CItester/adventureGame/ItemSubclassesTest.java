@@ -49,6 +49,15 @@ class ItemSubclassesTest {
         //Then
         assertEquals("You turn the radiator. The room starts to warm up.", result);
     }
+    @Test
+    void Book(){
+        //given
+        Book book = new Book("Book", Arrays.asList("Use", "Inspekt"));
+        //When
+        String result = book.onUse();
+        //Then
+        assertEquals("The Book have been used", result);
+    }
 
     //ParameterizedTest
     @ParameterizedTest
@@ -57,6 +66,7 @@ class ItemSubclassesTest {
             "Lightswitch,You flip the lightswitch",
             "Frozen Key,The key is frozen",
             "Radiator,You turn the radiator. The room starts to warm up.",
+            "Book, The Book have been used"
     })
 
     void itemSubClassesParameterizedTest(String itemName, String expectedResult){
@@ -75,6 +85,9 @@ class ItemSubclassesTest {
                 break;
             case "Radiator":
                 item = new Radiator(itemName, Arrays.asList("Use", "Inspekt"));
+                break;
+            case "Book":
+                item = new Book(itemName, Arrays.asList("Use", "Inspekt"));
                 break;
             default: throw new IllegalArgumentException("Invalid item name: " + itemName);
         };
