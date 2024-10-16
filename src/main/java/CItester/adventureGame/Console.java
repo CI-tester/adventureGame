@@ -6,12 +6,13 @@ public class Console {
     Scanner scanner = new Scanner(System.in);
     boolean running = true;
 
-    public Console(Player p) {
+    public Console(Player p, Room[] rooms) {
         this.p = p;
     }
 
     Player p;
-
+    Room[] rooms;
+    int roomIndex = 0;
 
     public void printInfo(){
         System.out.println("Vad vill ni göra:" +
@@ -24,15 +25,19 @@ public class Console {
     public boolean doTurn(int choice){
         switch (choice){
             case 1:
-                p.moveForward();
+                p.moveForward(rooms[++roomIndex]);
                 break;
             case 2:
                 if(p.canMoveBack()){
-                    p.moveBack();
+                //    p.moveBack(rooms[--roomIndex]);
                 }
                 break;
             case 3:
-                p.lookInRoom();
+                Item[] items = p.lookInRoom();
+                System.out.println("You have the following objects in the room:");
+                for (Item item : items) {
+                    System.out.println("\n"+item);
+                }
                 break;
             case 4:
                 p.interactWithItem();

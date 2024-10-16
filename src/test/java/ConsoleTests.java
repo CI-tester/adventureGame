@@ -1,6 +1,9 @@
 import CItester.adventureGame.Console;
 import CItester.adventureGame.Player;
+import CItester.adventureGame.Room;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -10,7 +13,8 @@ public class ConsoleTests {
 
     @Test
     void doTurnTests(){
-        Console c = new Console(mock(Player.class));
+        Room[] rooms = {mock(Room.class)};
+        Console c = new Console(mock(Player.class), rooms);
 
         when(c.doTurn(2)).thenReturn(true);
 
