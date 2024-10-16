@@ -14,29 +14,25 @@ public class RoomTester {
 
     @Test
     void getItemsTest(){
-        Item item1 = mock(Item.class);
-        Item item2 = mock(Item.class);
-        Item item3 = mock(Item.class);
-        when(item1.toString()).thenReturn("Item 1");
-        when(item2.toString()).thenReturn("Item 2");
-        when(item3.toString()).thenReturn("Item 3");
+        //Given
+        Item item = mock(Item.class);
+        when(item.toString()).thenReturn("Item 1");
 
-        ArrayList<Item> items = new ArrayList<Item>();
+        ArrayList<Item> itemsEmpty = new ArrayList<Item>();
         ArrayList<Item> items2 = new ArrayList<Item>();
-        items2.add(item1);
-        items2.add(item2);
-        items2.add(item3);
+        items2.add(item);
+        items2.add(item);
 
-
+        //When
         //No Array
         Room room = new Room(null,null);
         //Empty Array
-        Room room2 = new Room(null,items);
+        Room room2 = new Room(null,itemsEmpty);
         //Items in array
         Room room3 = new Room(null,items2);
 
 
-
+        //Then
         assertThrows(NullPointerException.class, room::getItems);
         assertNull(room2.getItems());
         assertArrayEquals(items2.toArray(new Item[0]), room3.getItems());
@@ -45,29 +41,25 @@ public class RoomTester {
     }
     @Test
     void useItem(){
-
+        //Given
         Item item1 = mock(Item.class);
-        Item item2 = null;
-        Item item3 = mock(Item.class);
         when(item1.toString()).thenReturn("Item 1");
-        when(item3.toString()).thenReturn("Item 3");
-
+        ArrayList<Item> itemsEmpty = new ArrayList<Item>();
         ArrayList<Item> items = new ArrayList<Item>();
-        ArrayList<Item> items2 = new ArrayList<Item>();
-        items2.add(item1);
-        items2.add(item2);
-        items2.add(item3);
+        items.add(item1);
+        items.add(null);
 
 
-
+        //When
         //No Array
         Room room = new Room(null,null);
         //Empty Array
-        Room room2 = new Room(null,items);
+        Room room2 = new Room(null,itemsEmpty);
         //Items in array
-        Room room3 = new Room(null,items2);
+        Room room3 = new Room(null,items);
 
 
+        //Then
         //IndexToLow
         assertThrows(IndexOutOfBoundsException.class, ()->{room2.useItem(-5);});
         //IndexToHigh
