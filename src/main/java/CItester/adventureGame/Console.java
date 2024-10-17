@@ -25,21 +25,23 @@ public class Console {
         switch (choice){
             case 1:
                 if(p.canMoveForward()){
+                    System.out.println("Du går vidare till nästa rum.");
                      p.moveForward();
                 }else System.out.println("Kan inte gå framåt");
 
                 break;
             case 2:
                 if(p.canMoveBack()){
+                    System.out.println("Du går tilbaka till föregående rummet");
                     p.moveBack();
                 }else System.out.println("Kan inte gå bakåt");
                 break;
             case 3:
                 Item[] items = p.lookInRoom();
                  if(items.length == 0){
-                     System.out.println("There are no visable items in the room");
+                     System.out.println("Det finns inga åtkomstbara rum");
                 }
-                System.out.println("You have the following objects in the room:");
+                System.out.println("Du kan se följade Object i rummet:");
                 for (Item item : items) {
                     System.out.println("\n"+item);
                 }

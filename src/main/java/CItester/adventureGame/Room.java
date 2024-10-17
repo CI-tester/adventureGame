@@ -57,8 +57,9 @@ public boolean useItem(int index){
             if(isFrozenKey instanceof FrozenKey){
                 itemsVisible.remove(isFrozenKey);
                 ArrayList<String> interaction = new ArrayList();
-                interaction.add("The door has been unlocked");
+                interaction.add("Dörren har blivit upplåst");
                 itemsVisible.add(new Key("DoorKey",interaction));
+                break;
             }
         }
     }else if(item instanceof Lightswitch){

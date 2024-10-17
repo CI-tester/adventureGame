@@ -14,11 +14,12 @@ public class Player {
     public boolean interactWithItem(){
         int index = -1;
         Item[] itemList = currentRoom.getItems();
-        System.out.println("items: ");
+        System.out.println("Saker: ");
+        if(itemList.length == 0) return false;
         for (int i = 0; i < itemList.length; i++) {
-            System.out.println("index: " + i + "item name: " + itemList[i]);
+            System.out.println(i + ":  " + itemList[i]);
         }
-        System.out.println("with index?");
+        System.out.println("Välj ett index");
         try {
             index = Integer.parseInt(scan.next());
             return currentRoom.useItem(index);

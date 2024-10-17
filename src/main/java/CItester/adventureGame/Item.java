@@ -20,6 +20,11 @@ public class Item {
     }
 
     public String onUse(){
-        return "You have used the " + itemName + " item!";
+        return "Du har använt " + itemName;
+    }
+
+    @Override
+    public String toString() {
+        return itemName;
     }
 }
