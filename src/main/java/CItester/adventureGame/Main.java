@@ -45,6 +45,9 @@ public class Main {
                 "använd radiatorn för att smälta isblocket och " +
                 "kunna låsa upp dörren för att komma vidare");
 
+        r3.setRoomDescription("Du kommer in ett bibliotek med tre olika böcker " +
+                "som sticker ut. när rätt bok har valts öpnnans en gjömd dörr");
+
        r1.setNextRoom(r2);
        r2.setNextRoom(r3);
        r3.setNextRoom(r4);
