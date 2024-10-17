@@ -11,6 +11,6 @@ public class FrozenKey extends Item{
 
     @Override
     public String onUse(){
-        return "Nyckeln är fryst";
+        return "The key is frozen";
     }
 }
