@@ -5,22 +5,22 @@ import java.util.Scanner;
 
 public class Player {
     Room currentRoom;
-    Room previousRoom;
-    Room nextRoom;
     Scanner scan = new Scanner(System.in);
   
      public Player(Room startingRoom) {
-        this.currentRoom = startingRoom;
+         setCurrentRoom(startingRoom);
+     //this.currentRoom = startingRoom;
     }
 
     public boolean interactWithItem(){
         int index = -1;
         Item[] itemList = currentRoom.getItems();
-        System.out.println("items: ");
+        System.out.println("Saker: ");
+        if(itemList.length == 0) return false;
         for (int i = 0; i < itemList.length; i++) {
-            System.out.println("index: " + i + "item name: " + itemList[i]);
+            System.out.println(i + ":  " + itemList[i]);
         }
-        System.out.println("with index?");
+        System.out.println("Välj ett index");
         try {
             index = Integer.parseInt(scan.next());
             return currentRoom.useItem(index);
@@ -43,21 +43,19 @@ public class Player {
 
 
     public boolean canMoveBack() {
-        return this.previousRoom != null && this.previousRoom.isAccessible();
+        return this.currentRoom.getPreviousRoom() != null && this.currentRoom.getPreviousRoom().isAccessible();
     }
 
     public void moveBack(){
         if (!canMoveBack()) {
             throw new IllegalStateException("Cannot move back");
         } else {
-            this.nextRoom = this.currentRoom;
-            setCurrentRoom(this.previousRoom);
-            this.previousRoom = null;
+            setCurrentRoom(this.currentRoom.getPreviousRoom());
         }
     }
 
     public boolean canMoveForward() {
-        return this.nextRoom != null && this.nextRoom.isAccessible();
+        return this.currentRoom.getNextRoom() != null && this.currentRoom.getNextRoom().isAccessible();
     }
 
 
@@ -66,17 +64,16 @@ public class Player {
             throw new IllegalStateException("Cannot move forward");
         }
         else {
-            this.previousRoom = this.currentRoom;
-            setCurrentRoom(this.nextRoom);
-            this.nextRoom = null;
+            setCurrentRoom(this.currentRoom.getNextRoom());
         }
     }
 
 
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
-
+        System.out.println(room.getRoomDescription());
     }
+
 
     public Room getCurrentRoom() {
         return currentRoom;

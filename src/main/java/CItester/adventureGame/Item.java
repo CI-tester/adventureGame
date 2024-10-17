@@ -22,4 +22,9 @@ public class Item {
     public String onUse(){
         return "You have used the " + itemName + " item!";
     }
+
+    @Override
+    public String toString() {
+        return itemName;
+    }
 }
