@@ -8,7 +8,8 @@ public class Player {
     Scanner scan = new Scanner(System.in);
   
      public Player(Room startingRoom) {
-        this.currentRoom = startingRoom;
+         setCurrentRoom(startingRoom);
+     //this.currentRoom = startingRoom;
     }
 
     public boolean interactWithItem(){
@@ -70,8 +71,9 @@ public class Player {
 
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
-
+        System.out.println(room.getRoomDescription());
     }
+
 
     public Room getCurrentRoom() {
         return currentRoom;

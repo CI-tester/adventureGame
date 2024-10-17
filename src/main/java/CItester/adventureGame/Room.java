@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
+
+private String description;
 String colour;
 boolean isDark;
 Temperature temprature;
@@ -91,4 +93,11 @@ public void setPreviousRoom(Room previousRoom) {
 public boolean isAccessible() {
         return accessible;
 }
+public String getRoomDescription() { //call the Method when you enter a new room
+        //System.out.print(description);
+        return description;
+}
+void setRoomDescription(String description){
+    this.description = description;
+} //a way to set description on a given room || use a constructor
 }
